@@ -1,0 +1,38 @@
+
+name: CI - Calidad y Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  android-lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎 Checkout del código fuente
+        uses: actions/checkout@v3
+
+      - name: 🧰 Configurar JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: 🛠 Hacer ejecutable gradlew
+        run: chmod +x ./gradlew
+
+      - name: 🧹 Ejecutar ktlint
+        run: ./gradlew ktlintCheck
+
+      - name: 🔍 Ejecutar detekt
+        run: ./gradlew detekt
+
+      - name: 🧪 Ejecutar pruebas unitarias
+        run: ./gradlew test
+
+      - name: 📦 Compilar APK debug
+        run: ./gradlew assembleDebug

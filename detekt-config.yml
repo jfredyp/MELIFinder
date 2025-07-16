@@ -1,0 +1,73 @@
+
+build:
+  maxIssues: 0
+  excludeCorrectable: false
+  weights:
+    complexity: 2
+    LongParameterList: 1
+    style: 1
+
+config:
+  validation: true
+
+processors:
+  active: true
+
+console-reports:
+  active: true
+
+output-reports:
+  active: true
+
+style:
+  MagicNumber:
+    active: true
+    ignoreNumbers: [-1, 0, 1, 2]
+    ignoreHashCodeFunction: true
+    ignorePropertyDeclaration: true
+    ignoreLocalVariableDeclaration: true
+    ignoreConstantDeclaration: true
+    ignoreCompanionObjectPropertyDeclaration: true
+
+  MaxLineLength:
+    active: true
+    maxLineLength: 120
+    excludePackageStatements: true
+    excludeImportStatements: true
+    excludeCommentStatements: false
+
+  ForbiddenComment:
+    active: true
+    comments: ["TODO:", "FIXME:", "STOPSHIP:"]
+
+  ReturnCount:
+    active: true
+    max: 2
+
+  WildcardImport:
+    active: true
+
+  UseDataClass:
+    active: true
+
+complexity:
+  LongMethod:
+    active: true
+    threshold: 30
+
+  LargeClass:
+    active: true
+    threshold: 600
+
+performance:
+  SpreadOperator:
+    active: true
+
+potential-bugs:
+  UnsafeCallOnNullableType:
+    active: true
+
+exceptions:
+  TooGenericExceptionCaught:
+    active: true
+    exceptionNames: ['Exception', 'Throwable']
