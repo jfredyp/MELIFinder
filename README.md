@@ -92,4 +92,4 @@ Este README sirve como punto de entrada para entender la arquitectura del proyec
 
 **¿Quieres seguir leyendo? Para ver la documentación completa, conocer la arquitectura, herramientas, convenciones y estructura completa de MELIFinder, visita la siguiente documentación:**
 
-📄 [Ver README completo de la app en la rama `main` →](https://github.com/jfredyp/MELIFinder/blob/main/README.md)
+📄 [Ver README completo de la app en la rama `develop` →](https://github.com/jfredyp/MELIFinder/blob/develop/README.md)
