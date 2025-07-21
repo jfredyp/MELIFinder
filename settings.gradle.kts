@@ -25,3 +25,11 @@ dependencyResolutionManagement {
 
 rootProject.name = "MELIFinder"
 include(":app")
+include(":domain")
+include(":data")
+include(":core:network")
+include(":core:ui")
+include(":core:search")
+include(":core:detail")
+include(":core:Logger")
+include(":core:common")
