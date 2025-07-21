@@ -7,3 +7,30 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.23.1"
     id("com.google.gms.google-services") version "4.4.3" apply false
 }
+subprojects {
+    plugins.withId("com.android.library") {
+        apply(plugin = "org.jlleitschuh.gradle.ktlint")
+        apply(plugin = "io.gitlab.arturbosch.detekt")
+
+        tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+            jvmTarget = "17"
+        }
+
+        tasks.matching { it.name == "preBuild" }.configureEach {
+            dependsOn("ktlintCheck", "detekt")
+        }
+    }
+
+    plugins.withId("com.android.application") {
+        apply(plugin = "org.jlleitschuh.gradle.ktlint")
+        apply(plugin = "io.gitlab.arturbosch.detekt")
+
+        tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+            jvmTarget = "17"
+        }
+
+        tasks.matching { it.name == "preBuild" }.configureEach {
+            dependsOn("ktlintCheck","ktlintFormat", "detekt")
+        }
+    }
+}
