@@ -9,6 +9,7 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven(url = "https://jitpack.io")
     }
     plugins {
         id("io.gitlab.arturbosch.detekt") version "1.23.1"

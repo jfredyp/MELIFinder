@@ -1,0 +1,10 @@
+app_package_name "com.jhonprieto.melifinder"
+tests_package_name "com.jhonprieto.melifinder.test"
+test_instrumentation_runner "androidx.test.runner.AndroidJUnitRunner"
+locales ["en-US"]
+use_tests_in_classes ["com.jhonprieto.melifinder.ScreenshotTest"]
+app_apk_path "./app/build/outputs/apk/debug/app-debug.apk"
+tests_apk_path "./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
+clear_previous_screenshots true
+skip_open_summary true
+build_tools_version("35.0.1")

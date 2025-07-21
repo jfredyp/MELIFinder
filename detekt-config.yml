@@ -46,6 +46,7 @@ style:
 
   WildcardImport:
     active: true
+    excludeImports: ['org.junit.Assert']
 
   UseDataClass:
     active: true

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "583553464119",
+    "project_id": "melifinder-col",
+    "storage_bucket": "melifinder-col.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:583553464119:android:8b93be0e6a37e382d70cb2",
+        "android_client_info": {
+          "package_name": "com.jhonprieto.melifinder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5sgJga35rPEGrUSknNM1ZeJbYHZ1hKCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

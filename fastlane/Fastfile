@@ -1,1 +1,93 @@
-# Fastlane config placeholder
+platform :android do
+
+  desc "Corrige el estilo de código usando ktlint"
+  lane :format_code do
+    sh "./gradlew ktlintFormat"
+  end
+
+  desc "Compila la app en modo Debug"
+  lane :build_debug do
+    gradle(task: "assembleDebug")
+  end
+
+  desc "Compila la app en modo Release sin distribución"
+  lane :build_release do
+    gradle(task: "assembleRelease")
+  end
+
+  desc "Ejecuta las pruebas unitarias del proyecto"
+  lane :run_tests do
+    gradle(
+      task: "test",
+      build_type: "Debug"
+    )
+  end
+
+  desc "Distribuye la app a Firebase App Distribution"
+  lane :distribute_firebase do
+    gradle(
+      task: "assemble",
+      build_type: "Release"
+    )
+
+    firebase_app_distribution(
+      app: "1:583553464119:android:8b93be0e6a37e382d70cb2", # ← Reemplaza con tu App ID real
+      testers: "jhontre97@gmail.com",            # ← Lista separada por comas si son varios
+      release_notes: "Versión distribuida automáticamente desde Fastlane 🚀",
+      service_credentials_file: "fastlane/credentials/firebase-service-account.json"
+    )
+  end
+
+  desc "Ejecuta tests, compila release y distribuye en Firebase (QA Release)"
+  lane :qa_release do
+    run_tests
+    build_release
+    distribute_firebase
+  end
+
+  # 📸 Captura screenshots automatizados usando screengrab
+  desc "Captura screenshots con Screengrab (UI automation)"
+  lane :capture_screenshots do
+    sh("pwd")
+    sh("../scripts/prepare_emulator.sh")
+    gradle(task: "assembleDebug")
+    gradle(task: "assembleAndroidTest")
+    screengrab
+    cleanup_emulator
+  end
+
+  # 📷 Toma screenshots y los copia a carpeta de documentación
+  desc "Captura screenshots y los guarda para documentación (docs/screenshots/...)"
+  lane :snapshot_docs do
+    capture_screenshots
+    sh "mkdir -p screenshots"
+    sh "cp -R fastlane/metadata/android/screenshots/* screenshots/"
+  end
+
+  # 🔍 Ejecuta pruebas instrumentadas en Firebase Test Lab
+  desc "Ejecuta pruebas UI (instrumentation) en Firebase Test Lab (Espresso)"
+  lane :test_firebase do
+    gradle(task: "assembleDebug")
+    gradle(task: "assembleAndroidTest")
+    sh("../scripts/testlab_run.sh")
+  end
+
+
+  lane :create_emulator do
+    avd_name = "screengrab_pixel"
+    sh("yes | sdkmanager 'system-images;android-28;google_apis;x86'")
+    sh("echo no | avdmanager create avd -n screengrab_pixel -k 'system-images;android-28;google_apis;x86' --device 'pixel'")
+
+  end
+
+  lane :boot_emulator do
+    sh("emulator -avd screengrab_pixel -no-snapshot -no-audio -no-boot-anim -gpu swiftshader_indirect &")
+    sh("adb wait-for-device")
+    sh("adb shell input keyevent 82") # Unlock screen
+  end
+  lane :cleanup_emulator do
+    sh("adb emu kill")
+  end
+
+
+end
