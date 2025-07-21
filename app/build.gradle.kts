@@ -1,3 +1,5 @@
+import io.gitlab.arturbosch.detekt.Detekt
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -10,6 +12,11 @@ detekt {
     config.setFrom(files("$rootDir/detekt-config.yml"))
     allRules = false
 }
+
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+    jvmTarget = "17"
+}
+
 ktlint
 tasks.named("preBuild") {
     dependsOn("ktlintCheck", "detekt")
@@ -22,7 +29,7 @@ android {
     defaultConfig {
         applicationId = "com.jhonprieto.melifinder"
         minSdk = 23
-        targetSdk = 35
+        targetSdk = 28
         versionCode = 1
         versionName = "1.0"
 
@@ -60,11 +67,14 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation("com.google.firebase:firebase-config-ktx:21.6.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation("tools.fastlane:screengrab:2.1.1")
+    androidTestImplementation("androidx.test:rules:1.5.0")
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }

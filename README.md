@@ -59,6 +59,39 @@ Este proyecto combina herramientas modernas para asegurar un ciclo de desarrollo
 - **Fastlane** utilizado para generar builds firmados, ejecutar tests, y publicar versiones.
 - `./scripts/setup.sh` automatiza la instalación de herramientas clave como Ruby, rbenv, gems, etc.
 
+
+## 🚀 Automatización con Fastlane y Firebase
+
+Se usa [`Fastlane`](https://fastlane.tools/) para automatizar la generación del APK y su distribución con [`Firebase App Distribution`](https://firebase.google.com/products/app-distribution).
+
+Esto permite:
+
+- Distribución rápida a testers o stakeholders sin necesidad de builds manuales.
+- Flujo reproducible y documentado.
+- Escalabilidad futura hacia Firebase Test Lab para testing automatizado en granjas de dispositivos.
+
+### Comando principal de distribución:
+
+```bash
+bundle exec fastlane android distribute_firebase
+```
+
+### 🔐 Seguridad de credenciales
+
+Este proyecto **no incluye credenciales sensibles en el repositorio**.
+
+Para ejecutar el `lane` de distribución (`distribute_firebase`), es necesario tener un archivo de cuenta de servicio de Firebase, que **debe generarse manualmente** y colocarse localmente en:
+
+```bash
+fastlane/credentials/firebase-service-account.json
+```
+
+
+Este archivo está excluido del control de versiones (`.gitignore`) para mantener la seguridad del proyecto y cumplir con las buenas prácticas profesionales.
+
+> 📌 Si deseas probar la distribución, asegúrate de crear tu propia cuenta de servicio con el rol `Firebase App Distribution Admin` y vincularla a tu app Firebase o contactame para compartir contigo y hacer una demostración en vivo.
+
+
 ---
 
 ## 🧭 Convenciones y estilo
@@ -66,6 +99,44 @@ Este proyecto combina herramientas modernas para asegurar un ciclo de desarrollo
 - **Estilo Kotlin** definido por `ktlint` (v0.49+) y reglas adicionales vía `detekt`
 - **Bloqueo de PRs con errores de estilo o análisis estático**
 - Git hooks locales refuerzan la validación previa a cada `checkout`, `pull` o `merge`
+
+---
+
+## 🧹 Calidad del Código
+
+Este proyecto implementa análisis estático y formateo automático con:
+
+- [`detekt`](https://detekt.dev/) – para análisis estático según las [Kotlin Coding Conventions](https://developer.android.com/kotlin/style-guide).
+- [`ktlint`](https://github.com/pinterest/ktlint) – para formateo de código y orden de imports.
+
+Esto asegura:
+
+- Consistencia con las guidelines oficiales de Android.
+- Prevención de errores comunes.
+- Código limpio, escalable y profesional.
+
+---
+
+## 🧪 Firebase Test Lab: Calidad en dispositivos reales
+
+Como parte del enfoque para esta prueba técnica, se incorporó la integración con **Firebase Test Lab**, la plataforma de pruebas automatizadas de Google que permite ejecutar *instrumented tests* en una granja de dispositivos físicos y virtuales.
+
+Aunque la automatización completa aún está en progreso, se implementó lo siguiente:
+
+### 🔄 Script automatizado (`testlab_run.sh`) que:
+
+- Construye el APK y el test APK con Gradle.
+- Ejecuta pruebas en Firebase Test Lab seleccionando automáticamente un modelo compatible.
+- Intenta capturar el `matrix_id` para análisis futuro.
+
+### ✅ Validación de resultados
+
+- Los *outcomes* se imprimen y validan.
+- Se aborta la ejecución en caso de fallos.
+
+### 🚀 Ejecución desde Fastlane
+
+Este flujo es ejecutado directamente desde una lane de Fastlane (`test_firebase`), manteniendo el pipeline coherente y alineado con las buenas prácticas de CI/CD.
 
 ---
 
@@ -93,8 +164,8 @@ Bienvenido a la documentación técnica del proyecto **MELIFinder**, una aplicac
 |--------|-------------|
 | [01 - Configuración del entorno](docs/01_entorno_local.md) | Configuración del entorno local: Script de setup, uso de Ruby, gemas, Fastlane, y Git hooks |
 | [02 - Calidad de código](docs/02_calidad_codigo.md) | Reglas, configuración y automatización de `ktlint` y `detekt` |
-| [03 - Git Hooks](03_hooks.md) | Hooks automáticos locales para validar el entorno y estilo de código |
-| [04 - CI/CD con Fastlane](04_ci_cd.md) | Automatización, firma, despliegue, lanes y GitHub Actions |
+| [03 - CI/CD con Fastlane](docs/03_fastlane_ci_cd.md) | Automatización, firma, despliegue, lanes y GitHub Actions |
+| [04 - Git Hooks](03_hooks.md) | Hooks automáticos locales para validar el entorno y estilo de código |
 | [05 - Seguridad](05_seguridad.md) *(opcional)* | Validación de secretos, firmas, cifrado y mejores prácticas |
 | [06 - Testing](06_testing.md) *(en desarrollo)* | Unit/UI tests, integración con Firebase TestLab y mocks |
 
