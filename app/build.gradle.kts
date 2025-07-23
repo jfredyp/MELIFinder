@@ -2,8 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("org.jlleitschuh.gradle.ktlint")
-    id("io.gitlab.arturbosch.detekt")
 }
 
 ktlint
@@ -54,12 +52,12 @@ android {
 }
 
 dependencies {
-
-    implementation(project(":core:ui"))
-    implementation(project(":core:search"))
+    implementation(project(":core:network"))
+    implementation(project(":domain"))
     implementation(project(":core:detail"))
     implementation(project(":core:Logger"))
     implementation(project(":core:common"))
+    implementation(project(":data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -69,12 +67,17 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.runtime.android)
+
+    implementation(platform("androidx.compose:compose-bom:2024.05.00"))
+    implementation("io.insert-koin:koin-android:3.5.0")
+    implementation("io.insert-koin:koin-androidx-compose:3.5.0")
     implementation("com.google.firebase:firebase-config-ktx:21.6.1")
-    implementation("androidx.navigation:navigation-compose:2.7.7")
-    implementation("io.insert-koin:koin-androidx-compose:3.4.6")
-    implementation("androidx.activity:activity-compose:1.8.2")
     implementation("androidx.compose.ui:ui:1.6.4")
-    implementation("androidx.compose.material3:material3:1.2.0-alpha10")
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.6.4")
+    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation(libs.androidx.runtime.android)
+    implementation(libs.androidx.navigation.compose.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -27,6 +27,8 @@ fun ProductDto.toDomain(): Product = Product(
     title = name,
     price = attributes.find { it.id == "PRICE" }?.valueName?.takeIf { !it.isNullOrBlank() }?.toDoubleOrNull(),
     thumbnail = null,
+    mainImageUrl = pictures?.firstOrNull()?.url, // <- obtiene la primera imagen, si hay
+    allImageUrls = pictures?.map { it.url } ?: emptyList(),
     condition = attributes.find { it.id == "ITEM_CONDITION" }?.valueName,
     permalink = permalink
 )

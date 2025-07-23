@@ -3,7 +3,7 @@ package com.jhonprieto.logger
 object Logger {
     enum class LogLevel { DEBUG, INFO, WARN, ERROR }
 
-    var enabled = false
+    var enabled = true
 
     private val isAndroid: Boolean by lazy { isAndroidRuntime() }
 

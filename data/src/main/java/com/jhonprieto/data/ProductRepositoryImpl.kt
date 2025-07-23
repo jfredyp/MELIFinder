@@ -27,10 +27,11 @@ class ProductRepositoryImpl(
                 onFailure = { throwable ->
                     val apiEx = ApiErrorHandler.parse(throwable)
                     Logger.e("ProductRepositoryImpl", "Error in searchByQuery", apiEx)
-                    when (apiEx) {
+                    ApiResult.Error(apiEx.toErrorType(), apiEx.message ?: apiEx.type.name)
+                    /*when (apiEx) {
                         is ApiException.Network -> ApiResult.NetworkError
-                        else -> ApiResult.Error(apiEx.toErrorType(), apiEx.message.orEmpty())
-                    }
+                        else -> ApiResult.Error(apiEx.toErrorType(), apiEx.message ?: apiEx.type.name)
+                    }*/
                 }
             )
     }

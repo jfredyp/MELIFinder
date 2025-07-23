@@ -30,7 +30,7 @@ class ProductRepositoryImplTest {
     @Test
     fun `searchByQuery empty devuelve lista vacía`() = runBlocking {
         val emptyService = object : MockApiService() {
-            override suspend fun searchByQuery(status: String, siteId: String, query: String) =
+            override suspend fun searchByQuery(status: String, siteId: String, query: String, limit: Int) =
                 SearchResponseDto(
                     keywords = "",
                     paging = PagingDto(0, 0, 0),
@@ -45,7 +45,12 @@ class ProductRepositoryImplTest {
     @Test
     fun `searchByQuery network error devuelve NETWORK`() = runBlocking {
         val service = object : MockApiService() {
-            override suspend fun searchByQuery(status: String, siteId: String, query: String): SearchResponseDto {
+            override suspend fun searchByQuery(
+                status: String,
+                siteId: String,
+                query: String,
+                limit: Int
+            ): SearchResponseDto {
                 throw IOException("timeout")
             }
         }
@@ -57,7 +62,12 @@ class ProductRepositoryImplTest {
     @Test
     fun `searchByQuery unauthorized devuelve UNAUTHORIZED`() = runBlocking {
         val service = object : MockApiService() {
-            override suspend fun searchByQuery(status: String, siteId: String, query: String): SearchResponseDto {
+            override suspend fun searchByQuery(
+                status: String,
+                siteId: String,
+                query: String,
+                limit: Int
+            ): SearchResponseDto {
                 val resp = Response.error<Any>(
                     401,
                     "".toResponseBody("application/json".toMediaTypeOrNull())
@@ -73,7 +83,12 @@ class ProductRepositoryImplTest {
     @Test
     fun `searchByQuery forbidden devuelve FORBIDDEN`() = runBlocking {
         val service = object : MockApiService() {
-            override suspend fun searchByQuery(status: String, siteId: String, query: String): SearchResponseDto {
+            override suspend fun searchByQuery(
+                status: String,
+                siteId: String,
+                query: String,
+                limit: Int
+            ): SearchResponseDto {
                 val resp = Response.error<Any>(
                     403,
                     "".toResponseBody("application/json".toMediaTypeOrNull())
@@ -89,7 +104,12 @@ class ProductRepositoryImplTest {
     @Test
     fun `searchByQuery not found devuelve NOT_FOUND`() = runBlocking {
         val service = object : MockApiService() {
-            override suspend fun searchByQuery(status: String, siteId: String, query: String): SearchResponseDto {
+            override suspend fun searchByQuery(
+                status: String,
+                siteId: String,
+                query: String,
+                limit: Int
+            ): SearchResponseDto {
                 val resp = Response.error<Any>(
                     404,
                     "".toResponseBody("application/json".toMediaTypeOrNull())
@@ -105,7 +125,12 @@ class ProductRepositoryImplTest {
     @Test
     fun `searchByQuery server error devuelve SERVER_ERROR`() = runBlocking {
         val service = object : MockApiService() {
-            override suspend fun searchByQuery(status: String, siteId: String, query: String): SearchResponseDto {
+            override suspend fun searchByQuery(
+                status: String,
+                siteId: String,
+                query: String,
+                limit: Int
+            ): SearchResponseDto {
                 val resp = Response.error<Any>(
                     500,
                     "".toResponseBody("application/json".toMediaTypeOrNull())
@@ -121,7 +146,12 @@ class ProductRepositoryImplTest {
     @Test
     fun `searchByQuery unknown http code devuelve UNKNOWN`() = runBlocking {
         val service = object : MockApiService() {
-            override suspend fun searchByQuery(status: String, siteId: String, query: String): SearchResponseDto {
+            override suspend fun searchByQuery(
+                status: String,
+                siteId: String,
+                query: String,
+                limit: Int
+            ): SearchResponseDto {
                 val resp = Response.error<Any>(
                     418,
                     "".toResponseBody("application/json".toMediaTypeOrNull())
@@ -137,7 +167,12 @@ class ProductRepositoryImplTest {
     @Test
     fun `searchByQuery generic exception devuelve UNKNOWN`() = runBlocking {
         val service = object : MockApiService() {
-            override suspend fun searchByQuery(status: String, siteId: String, query: String): SearchResponseDto {
+            override suspend fun searchByQuery(
+                status: String,
+                siteId: String,
+                query: String,
+                limit: Int
+            ): SearchResponseDto {
                 throw error("boom")
             }
         }

@@ -19,7 +19,8 @@ class ProductMapperTest {
             attributes = listOf(
                 AttributeDto("PRICE", "Precio", null, "5000.0"),
                 AttributeDto("ITEM_CONDITION", "Condición", null, "new")
-            )
+            ),
+            pictures = emptyList()
         )
 
         val domain = dto.toDomain()
@@ -39,7 +40,8 @@ class ProductMapperTest {
             status = "active",
             domainId = "MLA-CELLPHONES",
             permalink = null,
-            attributes = emptyList()
+            attributes = emptyList(),
+            pictures = emptyList()
         )
 
         val domain = dto.toDomain()

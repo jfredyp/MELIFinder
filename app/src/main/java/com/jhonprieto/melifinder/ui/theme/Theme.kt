@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package com.jhonprieto.melifinder.ui.theme
 
 import android.os.Build
@@ -8,6 +10,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
@@ -17,9 +20,15 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = Yellow500,
+    primaryContainer = Yellow600,
+    secondary = Gray900,
+    onPrimary = Color.White,
+    onSecondary = Color.White,
+    background = Gray100,
+    onBackground = PrimaryText,
+    surface = Color.White,
+    onSurface = PrimaryText
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
