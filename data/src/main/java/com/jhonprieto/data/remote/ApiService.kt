@@ -17,8 +17,9 @@ interface ApiService {
     @GET("products/search")
     suspend fun searchByQuery(
         @Query("status") status: String = "active",
-        @Query("site_id") siteId: String = "MLA",
-        @Query("q") query: String
+        @Query("site_id") siteId: String = "MCO",
+        @Query("q") query: String,
+        @Query("limit") limit: Int = 20
     ): SearchResponseDto
 
     /**
@@ -28,8 +29,9 @@ interface ApiService {
     @GET("products/search")
     suspend fun searchByProductIdentifier(
         @Query("status") status: String = "active",
-        @Query("site_id") siteId: String = "MLA",
-        @Query("product_identifier") productIdentifier: String
+        @Query("site_id") siteId: String = "MCO",
+        @Query("product_identifier") productIdentifier: String,
+        @Query("limit") limit: Int = 20
     ): SearchResponseDto
 
     /**
@@ -39,7 +41,7 @@ interface ApiService {
     @GET("products/search")
     suspend fun searchByQueryAndDomain(
         @Query("status") status: String = "active",
-        @Query("site_id") siteId: String = "MLA",
+        @Query("site_id") siteId: String = "MCO",
         @Query("q") query: String,
         @Query("domain_id") domainId: String
     ): SearchResponseDto

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MELIFinder</string>
+    <string name="greeting">Hola, %1$s</string>
+    <string name="track_title">Buscar productos</string>
+    <string name="track_hint">Ingresa el nombre o palabra clave del producto que deseas encontrar</string>
+    <string name="track_placeholder">Buscar en Mercado Libre</string>
+    <string name="search_button">Buscar</string>
+    <string name="scan_qr">Escanear QR</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="unread_notifications">%1$d</string>
 </resources>

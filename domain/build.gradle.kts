@@ -1,7 +1,5 @@
 plugins {
     kotlin("jvm")
-    id("org.jlleitschuh.gradle.ktlint")
-    id("io.gitlab.arturbosch.detekt")
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -13,6 +11,5 @@ kotlin {
     }
 }
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+
 }

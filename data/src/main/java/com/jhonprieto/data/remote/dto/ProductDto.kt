@@ -5,6 +5,7 @@ import com.squareup.moshi.Json
 data class ProductDto(
     val id: String,
     val name: String,
+    val pictures: List<PictureDto>?,
     val status: String,
     @Json(name = "domain_id")
     val domainId: String,

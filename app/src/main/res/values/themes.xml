@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <array name="com_google_android_gms_fonts_certs">
+        <item>
+            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu1PbP8F9Z7e8n/vQwYp+
+        </item>
+    </array>
     <style name="Theme.MELIFinder" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>

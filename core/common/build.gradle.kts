@@ -35,8 +35,6 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

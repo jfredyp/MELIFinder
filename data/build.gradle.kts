@@ -37,7 +37,7 @@ android {
 dependencies {
 
     implementation(project(":domain"))
-    implementation(project(":core:network"))
+
     implementation(project(":core:Logger"))
     implementation(project(":core:common"))
 
@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
+    testImplementation(project(":core:network"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
