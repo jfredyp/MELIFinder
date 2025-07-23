@@ -26,10 +26,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.jhonprieto.domain.model.Product
 
+@Suppress("LongMethod")
 @Composable
 fun productListItem(
     product: Product,
@@ -38,21 +41,24 @@ fun productListItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(horizontal = 1.dp, vertical = 2.dp) // Espaciado entre tarjetas
             .clickable { onClick() },
-        shape = RoundedCornerShape(14.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        shape = RoundedCornerShape(12.dp), // Bordes más grandes y suaves
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Row(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier
+                .background(Color.White) // Fondo blanco como en el modelo
+                .padding(14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
-                model = product.mainImageUrl, // Ahora usamos la url principal
+                model = product.mainImageUrl,
                 contentDescription = product.title ?: "Sin nombre",
                 modifier = Modifier
-                    .size(62.dp)
-                    .clip(RoundedCornerShape(10.dp))
-                    .background(Color(0xFFF6F6F6))
+                    .size(66.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(Color(0xFFF4F4F4))
             )
             Spacer(modifier = Modifier.width(16.dp))
             Column(
@@ -61,27 +67,38 @@ fun productListItem(
             ) {
                 Text(
                     text = product.title ?: "Sin nombre",
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp,
+                        color = Color(0xFF333333)
+                    ),
                     maxLines = 2
                 )
-                Spacer(modifier = Modifier.height(2.dp))
+                Spacer(modifier = Modifier.height(6.dp))
                 Text(
-                    text = product.price?.let { "$${"%,.0f".format(it) }" } ?: "Sin precio",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Gray
+                    text = product.price?.let { "$${"%,.0f".format(it) }" } ?: "$ ----",
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.sp
+                    ),
+                    color = Color(0xFF333333)
                 )
-                Spacer(modifier = Modifier.height(2.dp))
+                Spacer(modifier = Modifier.height(3.dp))
                 Text(
-                    text = product.condition?.capitalize() ?: "Condición desconocida",
+                    text = product.condition?.replaceFirstChar { it.uppercase() } ?: "Condición desconocida",
                     style = MaterialTheme.typography.labelSmall,
-                    color = Color(0xFF2ECC71)
+                    color = if (product.condition?.lowercase() == "nuevo" || product.condition?.lowercase() == "new") {
+                        Color(0xFF8A8A8A)
+                    } else {
+                        Color(0xFF2ECC71)
+                    }
                 )
             }
             Spacer(modifier = Modifier.width(8.dp))
             Icon(
                 imageVector = Icons.Filled.FavoriteBorder,
                 contentDescription = "Favorito",
-                tint = Color.LightGray,
+                tint = Color(0xFFCCCCCC),
                 modifier = Modifier.size(22.dp)
             )
         }
