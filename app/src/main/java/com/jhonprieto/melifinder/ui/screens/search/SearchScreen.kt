@@ -24,13 +24,15 @@ import com.jhonprieto.domain.error.ApiErrorType
 import com.jhonprieto.domain.model.Product
 import com.jhonprieto.melifinder.ui.components.error.errorStateView
 import com.jhonprieto.melifinder.ui.components.product.productListItem
+import com.jhonprieto.melifinder.ui.theme.Gray900
 import com.jhonprieto.melifinder.ui.theme.Yellow400
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun searchScreen(
-    query: String
+    query: String,
+    onProductClick: (String) -> Unit
 ) {
     val viewModel: SearchViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsState()
@@ -48,7 +50,10 @@ fun searchScreen(
             title = {
                 Text(
                     text = "Resultados",
-                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.Bold,
+                        color = Gray900
+                    )
                 )
             },
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -64,7 +69,7 @@ fun searchScreen(
             when (val state = uiState) {
                 is SearchUiState.Idle -> searchIdleView()
                 is SearchUiState.Loading -> searchLoadingView()
-                is SearchUiState.Success -> searchSuccessView(state.products)
+                is SearchUiState.Success -> searchSuccessView(state.products, onProductClick)
                 is SearchUiState.Error -> searchErrorView(
                     errorType = state.type,
                     onRetry = { viewModel.search(query) }
@@ -94,7 +99,7 @@ private fun searchLoadingView() {
 }
 
 @Composable
-private fun searchSuccessView(products: List<Product>) {
+private fun searchSuccessView(products: List<Product>, onProductClick: (String) -> Unit) {
     if (products.isEmpty()) {
         Text("Sin resultados", style = MaterialTheme.typography.bodyMedium)
     } else {
@@ -108,6 +113,7 @@ private fun searchSuccessView(products: List<Product>) {
                 productListItem(
                     product = products[idx],
                     onClick = {
+                        onProductClick(products[idx].id ?: "")
                         println("onProductClick(products[idx])")
                     } // Aquí puedes manejar el click en el producto
                 )

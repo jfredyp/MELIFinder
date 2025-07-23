@@ -78,6 +78,11 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation(libs.androidx.runtime.android)
     implementation(libs.androidx.navigation.compose.android)
+    implementation(libs.androidx.material.icons.core.android)
+    implementation(libs.androidx.material.icons.core.android)
+    implementation(libs.androidx.material.icons.core.android)
+    implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.foundation.layout.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

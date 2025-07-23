@@ -41,7 +41,7 @@ fun productListItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 1.dp, vertical = 2.dp) // Espaciado entre tarjetas
+            .padding(vertical = 2.dp) // Espaciado entre tarjetas
             .clickable { onClick() },
         shape = RoundedCornerShape(12.dp), // Bordes más grandes y suaves
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
