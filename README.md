@@ -19,7 +19,7 @@ Bienvenido al repositorio oficial de **MELIFinder**, una aplicación Android des
     </ul>
   </div>
     <div style="flex: 1; text-align: center;">
-    <img src="docs/demo.gif" width="100" alt="Demo">
+      <img src="docs/demo.gif" width="100" alt="Demo">
   </div>
 </div>
 
