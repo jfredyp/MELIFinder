@@ -9,7 +9,6 @@ import com.jhonprieto.domain.usecases.GetCategoriesUseCase
 import com.jhonprieto.domain.usecases.GetCategoryDetailUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 sealed class CategoryUiState {
@@ -23,7 +22,7 @@ class CategoryViewModel(
     private val getCategoryDetailUseCase: GetCategoryDetailUseCase
 ) : ViewModel() {
 
-    private val _categories = MutableStateFlow<List<Category>>(emptyList())
+    // private val _categories = MutableStateFlow<List<Category>>(emptyList())
     private val _uiState = MutableStateFlow<CategoryUiState>(CategoryUiState.Loading)
     val uiState: StateFlow<CategoryUiState> = _uiState
 
@@ -47,13 +46,16 @@ class CategoryViewModel(
                             launch {
                                 val detail = getCategoryDetailUseCase(category.id)
                                 pictureCache[category.id] = detail.pictureUrl
-                                _categories.update { list ->
-                                    list.map {
-                                        if (it.id == category.id) it.copy(picture = detail.pictureUrl) else it
-                                    }
-                                }
-                                // *** Aquí fuerza también el UI State ***
-                                _uiState.value = CategoryUiState.Success(_categories.value)
+                                val updated = (uiState.value as? CategoryUiState.Success)
+                                    ?.categories
+                                    ?.map {
+                                        if (it.id == category.id) {
+                                            it.copy(picture = detail.pictureUrl)
+                                        } else {
+                                            it
+                                        }
+                                    } ?: emptyList()
+                                _uiState.value = CategoryUiState.Success(updated)
                             }
                         }
                     }
