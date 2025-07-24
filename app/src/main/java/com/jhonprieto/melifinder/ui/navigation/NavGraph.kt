@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.jhonprieto.melifinder.ui.components.searchBarWithRecent
 import com.jhonprieto.melifinder.ui.screens.home.homeScreen
+import com.jhonprieto.melifinder.ui.screens.productDetail.productDetailScreen
 import com.jhonprieto.melifinder.ui.screens.search.searchScreen
 
 @Composable
@@ -29,8 +30,17 @@ fun navGraph(navController: NavHostController) {
         composable("search_screen/{query}") { backStackEntry ->
             val query = backStackEntry.arguments?.getString("query") ?: ""
             searchScreen(
-                query = query
+                query = query,
+                onProductClick = { productId ->
+                    navController.navigate("product_detail/$productId")
+                }
             )
+        }
+        composable("product_detail/{productId}") { backStackEntry ->
+            val productId = backStackEntry.arguments?.getString("productId") ?: ""
+            productDetailScreen(productId = productId) {
+                navController.popBackStack() // O lo que quieras para volver
+            }
         }
         composable("results") { /* ResultsScreen() */ }
         composable("detail/{productId}") { backStackEntry ->

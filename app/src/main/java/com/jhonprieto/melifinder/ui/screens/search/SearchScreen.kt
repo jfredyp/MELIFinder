@@ -6,26 +6,33 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.jhonprieto.domain.error.ApiErrorType
 import com.jhonprieto.domain.model.Product
 import com.jhonprieto.melifinder.ui.components.error.errorStateView
 import com.jhonprieto.melifinder.ui.components.product.productListItem
+import com.jhonprieto.melifinder.ui.theme.Gray900
+import com.jhonprieto.melifinder.ui.theme.Yellow400
 import org.koin.androidx.compose.koinViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun searchScreen(
-    query: String
+    query: String,
+    onProductClick: (String) -> Unit
 ) {
     val viewModel: SearchViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsState()
@@ -38,17 +45,37 @@ fun searchScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
     ) {
-        when (val state = uiState) {
-            is SearchUiState.Idle -> searchIdleView()
-            is SearchUiState.Loading -> searchLoadingView()
-            is SearchUiState.Success -> searchSuccessView(state.products)
-            is SearchUiState.Error -> searchErrorView(
-                errorType = state.type,
-                onRetry = { viewModel.search(query) }
+        CenterAlignedTopAppBar(
+            title = {
+                Text(
+                    text = "Resultados",
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.Bold,
+                        color = Gray900
+                    )
+                )
+            },
+            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                containerColor = Yellow400
             )
-            is SearchUiState.Empty -> searchEmptyView()
+        )
+        // Padding para separar del borde, igual que antes
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp)
+        ) {
+            when (val state = uiState) {
+                is SearchUiState.Idle -> searchIdleView()
+                is SearchUiState.Loading -> searchLoadingView()
+                is SearchUiState.Success -> searchSuccessView(state.products, onProductClick)
+                is SearchUiState.Error -> searchErrorView(
+                    errorType = state.type,
+                    onRetry = { viewModel.search(query) }
+                )
+                is SearchUiState.Empty -> searchEmptyView()
+            }
         }
     }
 }
@@ -72,7 +99,7 @@ private fun searchLoadingView() {
 }
 
 @Composable
-private fun searchSuccessView(products: List<Product>) {
+private fun searchSuccessView(products: List<Product>, onProductClick: (String) -> Unit) {
     if (products.isEmpty()) {
         Text("Sin resultados", style = MaterialTheme.typography.bodyMedium)
     } else {
@@ -86,6 +113,7 @@ private fun searchSuccessView(products: List<Product>) {
                 productListItem(
                     product = products[idx],
                     onClick = {
+                        onProductClick(products[idx].id ?: "")
                         println("onProductClick(products[idx])")
                     } // Aquí puedes manejar el click en el producto
                 )
