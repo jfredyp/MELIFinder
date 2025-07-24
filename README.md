@@ -6,16 +6,24 @@ Bienvenido al repositorio oficial de **MELIFinder**, una aplicación Android des
 ---
 ## 🚀 ¿De qué trata MELIFinder?
 
-**MELIFinder** es una aplicación que simula la búsqueda inteligente de productos o publicaciones dentro del ecosistema de Mercado Libre. Implementa un flujo robusto que incluye:
 
-- Exploración de ítems por búsqueda textual
-- Navegación fluida entre categorías y detalles
-- Gestión eficiente del ciclo de vida y consumo de APIs
-- Pruebas unitarias y de UI
-- Integración con herramientas modernas de calidad y automatización
+<div style="display: flex; align-items: center; gap: 24px;">
+  <div style="flex: 1; text-align: left;">
+    <img src="docs/demo.gif" width="180" alt="Demo">
+  </div>
+  <div style="flex: 4;">
+    <b>MELIFinder</b> es una aplicación que simula la búsqueda inteligente de productos o publicaciones dentro del ecosistema de Mercado Libre. Implementa un flujo robusto que incluye:
+    <ul>
+      <li>Exploración de ítems por búsqueda textual</li>
+      <li>Navegación fluida entre categorías y detalles</li>
+      <li>Gestión eficiente del ciclo de vida y consumo de APIs</li>
+      <li>Pruebas unitarias y de UI</li>
+      <li>Integración con herramientas modernas de calidad y automatización</li>
+    </ul>
+  </div>
+</div>
 
 > La app ha sido estructurada desde cero utilizando herramientas de análisis estático, validación automática de estilo y despliegue automatizado.
-
 
 Este README sirve como punto de entrada para entender la arquitectura del proyecto, herramientas utilizadas, flujos automatizados y convenciones de calidad.
 
@@ -189,7 +197,12 @@ MELIFinder busca demostrar un flujo completo de desarrollo profesional, incluyen
 3. Todo PR será evaluado con GitHub Actions (`lint.yml`)
 
 ---
+## 🎬 Demo
+---
 
+<p align="center">
+  <img src="docs/demo.gif" width="400" alt="Demo">
+</p>
 ## ✍️ Autor
 
 Jhon Prieto – [LinkedIn](https://www.linkedin.com/in/jhon-prieto-cifuentes1/)
