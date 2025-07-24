@@ -3,7 +3,6 @@ package com.jhonprieto.data.repositryImpl
 import com.jhonprieto.data.mapper.toDomain
 import com.jhonprieto.data.remote.ApiService
 import com.jhonprieto.data.remote.error.ApiErrorHandler
-import com.jhonprieto.data.remote.error.ApiException
 import com.jhonprieto.data.remote.error.toErrorType
 import com.jhonprieto.domain.ApiResult
 import com.jhonprieto.domain.model.Product
@@ -44,10 +43,7 @@ class ProductRepositoryImpl(
                 onFailure = { throwable ->
                     val apiEx = ApiErrorHandler.parse(throwable)
                     Logger.e("ProductRepositoryImpl", "Error in getProductDetail", apiEx)
-                    when (apiEx) {
-                        is ApiException.Network -> ApiResult.NetworkError
-                        else -> ApiResult.Error(apiEx.toErrorType(), apiEx.message.orEmpty())
-                    }
+                    ApiResult.Error(apiEx.toErrorType(), apiEx.message ?: apiEx.type.name)
                 }
             )
     }
