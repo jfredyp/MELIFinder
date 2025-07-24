@@ -19,7 +19,7 @@ Bienvenido al repositorio oficial de **MELIFinder**, una aplicación Android des
     </ul>
   </div>
     <div style="flex: 1; text-align: left;">
-    <img src="docs/demo.gif" width="180" alt="Demo">
+    <img src="docs/demo.gif" width="100" alt="Demo">
   </div>
 </div>
 
@@ -173,8 +173,8 @@ Bienvenido a la documentación técnica del proyecto **MELIFinder**, una aplicac
 | [01 - Configuración del entorno](docs/01_entorno_local.md) | Configuración del entorno local: Script de setup, uso de Ruby, gemas, Fastlane, y Git hooks |
 | [02 - Calidad de código](docs/02_calidad_codigo.md) | Reglas, configuración y automatización de `ktlint` y `detekt` |
 | [03 - CI/CD con Fastlane](docs/03_fastlane_ci_cd.md) | Automatización, firma, despliegue, lanes y GitHub Actions |
-| [04 - Git Hooks](03_hooks.md) | Hooks automáticos locales para validar el entorno y estilo de código |
-| [05 - Seguridad](05_seguridad.md) *(opcional)* | Validación de secretos, firmas, cifrado y mejores prácticas |
+| [04 - Arquitectura de la App](docs/04_arquitectura_MELIFinder.md) | Explicación detallada de la estructura modular basada en Clean Architecture y MVVM, incluyendo la organización por capas (presentation, domain, data, network, common), los principios de diseño aplicados (separación de responsabilidades, bajo acoplamiento, alta cohesión) y el uso de patrones como Repository, UseCase, State Management con sealed classes y Jetpack Compose. También se incluyen convenciones y decisiones técnicas tomadas para garantizar escalabilidad, mantenibilidad y testabilidad. |
+| [05 - Seguridad](05_seguridad.md) *(en desarrollo)* | Validación de secretos, firmas, cifrado y mejores prácticas |
 | [06 - Testing](06_testing.md) *(en desarrollo)* | Unit/UI tests, integración con Firebase TestLab y mocks |
 
 ---
