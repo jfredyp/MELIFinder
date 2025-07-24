@@ -4,6 +4,7 @@ import com.jhonprieto.data.mock.MockApiService
 import com.jhonprieto.data.remote.dto.PagingDto
 import com.jhonprieto.data.remote.dto.ProductDetailDto
 import com.jhonprieto.data.remote.dto.SearchResponseDto
+import com.jhonprieto.data.repositryImpl.ProductRepositoryImpl
 import com.jhonprieto.domain.ApiResult
 import com.jhonprieto.domain.error.ApiErrorType
 import kotlinx.coroutines.runBlocking

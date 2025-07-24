@@ -26,11 +26,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.jhonprieto.domain.model.Product
+import com.jhonprieto.melifinder.R
+import com.jhonprieto.melifinder.ui.screens.productDetail.getSimulatedCondition
+import com.jhonprieto.melifinder.ui.screens.productDetail.getSimulatedPrice
 
 @Suppress("LongMethod")
 @Composable
@@ -76,7 +80,8 @@ fun productListItem(
                 )
                 Spacer(modifier = Modifier.height(6.dp))
                 Text(
-                    text = product.price?.let { "$${"%,.0f".format(it) }" } ?: "$ ----",
+                    text = product.price?.let { "$${"%,.0f".format(it) }" }
+                        ?: "$${"%,.0f".format(getSimulatedPrice())}",
                     style = MaterialTheme.typography.bodyMedium.copy(
                         fontWeight = FontWeight.Bold,
                         fontSize = 12.sp
@@ -84,23 +89,31 @@ fun productListItem(
                     color = Color(0xFF333333)
                 )
                 Spacer(modifier = Modifier.height(3.dp))
+                val displayCondition = getSimulatedCondition(product.condition)
+                val conditionColor = getConditionColor(displayCondition)
                 Text(
-                    text = product.condition?.replaceFirstChar { it.uppercase() } ?: "Condición desconocida",
+                    text = getSimulatedCondition(product.condition),
                     style = MaterialTheme.typography.labelSmall,
-                    color = if (product.condition?.lowercase() == "nuevo" || product.condition?.lowercase() == "new") {
-                        Color(0xFF8A8A8A)
-                    } else {
-                        Color(0xFF2ECC71)
-                    }
+                    color = conditionColor
                 )
             }
             Spacer(modifier = Modifier.width(8.dp))
             Icon(
                 imageVector = Icons.Filled.FavoriteBorder,
-                contentDescription = "Favorito",
+                contentDescription = stringResource(R.string.favorite),
                 tint = Color(0xFFCCCCCC),
                 modifier = Modifier.size(22.dp)
             )
         }
+    }
+}
+
+@Composable
+fun getConditionColor(condition: String): Color {
+    return when (condition) {
+        stringResource(R.string.new_item) -> Color(0xFF2ECC71)
+        stringResource(R.string.used) -> Color(0xFFFF9800)
+        stringResource(R.string.refurbished) -> Color(0xFF2979FF)
+        else -> Color.Gray
     }
 }

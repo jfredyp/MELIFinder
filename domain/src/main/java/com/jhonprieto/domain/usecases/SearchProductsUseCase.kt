@@ -1,4 +1,4 @@
-package com.jhonprieto.domain
+package com.jhonprieto.domain.usecases
 
 import com.jhonprieto.domain.repository.ProductRepository
 

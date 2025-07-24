@@ -13,9 +13,14 @@ import com.jhonprieto.melifinder.ui.screens.search.searchScreen
 fun navGraph(navController: NavHostController) {
     NavHost(navController, startDestination = "home") {
         composable("home") {
-            homeScreen() {
-                navController.navigate("search")
-            }
+            homeScreen(
+                onSearchClick = {
+                    navController.navigate("search")
+                },
+                onCategoryClick = { category ->
+                    navController.navigate("search")
+                }
+            )
         }
         composable("search") {
             searchBarWithRecent(

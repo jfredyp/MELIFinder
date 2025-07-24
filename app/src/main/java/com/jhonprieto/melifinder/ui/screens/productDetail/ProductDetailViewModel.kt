@@ -43,7 +43,7 @@ package com.jhonprieto.melifinder.ui.screens.productDetail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jhonprieto.domain.ApiResult
-import com.jhonprieto.domain.SearchProductDetailsUseCase
+import com.jhonprieto.domain.usecases.SearchProductDetailsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

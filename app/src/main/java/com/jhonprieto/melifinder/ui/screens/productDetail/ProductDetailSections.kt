@@ -28,10 +28,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.jhonprieto.melifinder.R
 
 private val imageCarouselHeight = 280.dp
 private val productCardCorner = 18.dp
@@ -48,7 +50,7 @@ fun productImagesCarousel(images: List<String>) {
         items(images) { url ->
             AsyncImage(
                 model = url,
-                contentDescription = "Imagen producto",
+                contentDescription = stringResource(R.string.product_image),
                 modifier = Modifier
                     .padding(horizontal = 12.dp)
                     .clip(RoundedCornerShape(productCardCorner))
@@ -94,9 +96,17 @@ fun productInfoSection(
             Spacer(Modifier.width(4.dp))
             Text("($reviews)", color = Color.Gray, style = MaterialTheme.typography.bodySmall)
             Spacer(Modifier.width(8.dp))
-            Icon(Icons.Default.FavoriteBorder, contentDescription = "Wishlist", tint = Color.Gray)
+            Icon(
+                Icons.Default.FavoriteBorder,
+                contentDescription = stringResource(R.string.Wishlist),
+                tint = Color.Gray
+            )
             Spacer(Modifier.width(8.dp))
-            Icon(Icons.Default.Share, contentDescription = "Compartir", tint = Color.Gray)
+            Icon(
+                Icons.Default.Share,
+                contentDescription = stringResource(R.string.content_description),
+                tint = Color.Gray
+            )
         }
     }
 }
@@ -126,7 +136,11 @@ fun shortDescriptionSection(shortDescription: String?) {
 fun productSpecsSection(attributes: Map<String, String>) {
     if (attributes.isNotEmpty()) {
         Column(Modifier.padding(horizontal = 20.dp, vertical = 8.dp)) {
-            Text("Especificaciones", style = MaterialTheme.typography.titleMedium)
+            Text(
+                "Especificaciones",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
             Spacer(Modifier.height(6.dp))
             attributes.forEach { (k, v) ->
                 Text("$k: $v", style = MaterialTheme.typography.bodySmall)
