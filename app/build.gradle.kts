@@ -76,6 +76,7 @@ dependencies {
     implementation("androidx.compose.ui:ui:1.6.4")
     implementation("androidx.compose.ui:ui-text-google-fonts:1.6.4")
     implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("androidx.compose.material:material-icons-extended:1.5.0")
     implementation(libs.androidx.runtime.android)
     implementation(libs.androidx.navigation.compose.android)
     implementation(libs.androidx.material.icons.core.android)

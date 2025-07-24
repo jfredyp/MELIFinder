@@ -8,7 +8,7 @@ import com.jhonprieto.data.remote.dto.ProductDetailDto
 import com.jhonprieto.data.remote.dto.ProductDto
 import com.jhonprieto.data.remote.dto.SearchResponseDto
 
-open class MockApiService : ApiService {
+abstract class MockApiService : ApiService {
     override suspend fun searchByQuery(
         status: String,
         siteId: String,

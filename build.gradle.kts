@@ -15,9 +15,14 @@ subprojects {
         tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
             jvmTarget = "17"
         }
+        tasks.register("preChecks") {
+            group = "verification"
+            description = "Corre ktlintFormat antes de preBuild"
+            dependsOn("ktlintFormat","ktlintCheck", "detekt")
+        }
 
         tasks.matching { it.name == "preBuild" }.configureEach {
-            dependsOn("ktlintCheck", "detekt")
+            dependsOn("preChecks")
         }
     }
 
@@ -27,10 +32,6 @@ subprojects {
 
         tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
             jvmTarget = "17"
-        }
-
-        tasks.matching { it.name == "preBuild" }.configureEach {
-            dependsOn("ktlintCheck","ktlintFormat", "detekt")
         }
     }
 }

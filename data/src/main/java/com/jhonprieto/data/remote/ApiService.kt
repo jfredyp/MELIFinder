@@ -1,5 +1,7 @@
 package com.jhonprieto.data.remote
 
+import com.jhonprieto.data.remote.dto.CategoryDetailDto
+import com.jhonprieto.data.remote.dto.CategoryDto
 import com.jhonprieto.data.remote.dto.ProductDetailDto
 import com.jhonprieto.data.remote.dto.SearchResponseDto
 import retrofit2.http.Body
@@ -61,4 +63,12 @@ interface ApiService {
     suspend fun getProductDetail(
         @Path("product_id") productId: String
     ): ProductDetailDto
+
+    // Al final de ApiService.kt:
+
+    @GET("sites/MCO/categories")
+    suspend fun getCategories(): List<CategoryDto>
+
+    @GET("categories/{category_id}")
+    suspend fun getCategoryDetail(@Path("category_id") categoryId: String): CategoryDetailDto
 }

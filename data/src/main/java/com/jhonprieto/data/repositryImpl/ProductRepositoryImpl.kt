@@ -1,4 +1,4 @@
-package com.jhonprieto.data
+package com.jhonprieto.data.repositryImpl
 
 import com.jhonprieto.data.mapper.toDomain
 import com.jhonprieto.data.remote.ApiService
