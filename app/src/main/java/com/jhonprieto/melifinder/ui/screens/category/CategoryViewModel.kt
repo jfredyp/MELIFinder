@@ -57,6 +57,17 @@ class CategoryViewModel(
                                     } ?: emptyList()
                                 _uiState.value = CategoryUiState.Success(updated)
                             }
+                        } else {
+                            val updated = (uiState.value as? CategoryUiState.Success)
+                                ?.categories
+                                ?.map {
+                                    if (it.id == category.id) {
+                                        it.copy(picture = pictureCache[category.id])
+                                    } else {
+                                        it
+                                    }
+                                } ?: emptyList()
+                            _uiState.value = CategoryUiState.Success(updated)
                         }
                     }
                 }
