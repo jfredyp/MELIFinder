@@ -8,9 +8,6 @@ Bienvenido al repositorio oficial de **MELIFinder**, una aplicación Android des
 
 
 <div style="display: flex; align-items: center; gap: 24px;">
-  <div style="flex: 1; text-align: left;">
-    <img src="docs/demo.gif" width="180" alt="Demo">
-  </div>
   <div style="flex: 4;">
     <b>MELIFinder</b> es una aplicación que simula la búsqueda inteligente de productos o publicaciones dentro del ecosistema de Mercado Libre. Implementa un flujo robusto que incluye:
     <ul>
@@ -20,6 +17,9 @@ Bienvenido al repositorio oficial de **MELIFinder**, una aplicación Android des
       <li>Pruebas unitarias y de UI</li>
       <li>Integración con herramientas modernas de calidad y automatización</li>
     </ul>
+  </div>
+    <div style="flex: 1; text-align: left;">
+    <img src="docs/demo.gif" width="180" alt="Demo">
   </div>
 </div>
 
@@ -198,11 +198,13 @@ MELIFinder busca demostrar un flujo completo de desarrollo profesional, incluyen
 
 ---
 ## 🎬 Demo
+
+![Demo](docs/demo.gif)
+
+
 ---
 
-<p align="center">
-  <img src="docs/demo.gif" width="400" alt="Demo">
-</p>
+
 ## ✍️ Autor
 
 Jhon Prieto – [LinkedIn](https://www.linkedin.com/in/jhon-prieto-cifuentes1/)
