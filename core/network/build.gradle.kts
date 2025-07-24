@@ -12,7 +12,7 @@ android {
     defaultConfig {
         minSdk = 23
 
-        buildConfigField("String", "MELI_BEARER_TOKEN", "\"Bearer APP_USR-4219600329393108-072321-81deeab1ef923dd10422dd4084a0c602-271208496\"")
+        buildConfigField("String", "MELI_BEARER_TOKEN", "\"Bearer APP_USR-4219600329393108-072413-6920dfec2914b8b838992ac4d7316950-271208496\"")
         buildConfigField("String", "MELI_BASE_URL", "\"https://api.mercadolibre.com/\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
