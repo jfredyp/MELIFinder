@@ -4,9 +4,14 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
-ktlint
+tasks.register("preChecks") {
+    group = "verification"
+    description = "Corre ktlintFormat antes de preBuild"
+    dependsOn("ktlintFormat", "ktlintCheck", "detekt")
+}
+
 tasks.named("preBuild") {
-    dependsOn("ktlintCheck", "detekt")
+    dependsOn("preChecks")
 }
 
 android {
