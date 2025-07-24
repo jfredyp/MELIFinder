@@ -18,8 +18,8 @@ Bienvenido al repositorio oficial de **MELIFinder**, una aplicación Android des
       <li>Integración con herramientas modernas de calidad y automatización</li>
     </ul>
   </div>
-    <div style="flex: 1; text-align: left;">
-    <img src="docs/demo.gif" width="100" alt="Demo">
+    <div style="flex: 1; text-align: center;">
+      <img src="docs/demo.gif" width="100" alt="Demo">
   </div>
 </div>
 
